@@ -58,18 +58,14 @@ function mostrarStock() {
 }
 
 /*
-Recibe un nombre de modelo como parámetro
-Por ejemplo: buscarIndicePorModelo("Nokia 1100");
-Recorre el array modelos con un bucle for
-Va comparando cada elemento:
+Recibe un nombre de modelo como parámetro por ejemplo: buscarIndicePorModelo("Nokia 1100");
+Recorre el array modelos con un bucle for y comparo cada elemento:
 modelos[0], modelos[1], modelos[2], …
 toLowerCase() para que la búsqueda NO dependa de mayúsculas/minúsculas.
 (Ej.: "nokia 1100" == "NOKIA 1100")
 Si encuentra una coincidencia → devuelve el índice.
-Si modelos[10] es "Nokia 1100", entonces retorna 10.
-Si recorre todo el array y no lo encuentra
-return -1;
-Esto indica: "El modelo no existe en la lista."
+Si modelos[10] contiene "Nokia 1100", entonces retorna 10, el cual es el indice del array para este valor
+Si recorre todo el array y no lo encuentra hace return -1; esto indica: "El modelo no existe en la lista."
 */
 
 function buscarIndicePorModelo(nombreModelo) {
@@ -82,9 +78,9 @@ function buscarIndicePorModelo(nombreModelo) {
 }
 
 function registrarVenta() {
-    let nombre = prompt("Modelo a vender:");
+    let nombreModelo = prompt("Modelo a vender:");
 
-    let indice = buscarIndicePorModelo(nombre);
+    let indice = buscarIndicePorModelo(nombreModelo);
 
     if (indice === -1) {
         alert("Modelo inexistente");
@@ -104,7 +100,10 @@ function registrarVenta() {
     }
 
     stock[indice] -= cantidad;
-
+    // como la lista de celulares es fija no modifico el array de modelos
+    // ni su precio por ahora
+    // solo modifico su cantidad en stock, 0 seria que ya no hay pero no lo elimino del
+    // array de modelos
     alert("Venta realizada ok. Stock actualizado de " + modelos[indice] + ": " + stock[indice]);
 }
 
@@ -112,16 +111,15 @@ function stockTotal() {
     let total = 0;
 
     for (let i = 0; i < modelos.length; i++) {
-        total += precios[i] * stock[i];
+        total += precios[i] * stock[i]; // basta el array de precios unitarios y cantidades
     }
 
     alert("Inventario - valor total: $" + total);
     console.log("Inventario - valor total: $" + total);
 }
 
-// ==========================
 // MENÚ PRINCIPAL (obligatorio)
-// ==========================
+
 function menuPrincipal() {
     let opcion;
 
